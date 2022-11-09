@@ -22,6 +22,8 @@ services:
         traefik.docker.network: public
         traefik.http.services.node-red.loadbalancer.server.port: 1880
         traefik.enable: "true"
+    secrets:
+      - node-red-credential-secret
 
   influxdb:
     image: influxdb:2.5
