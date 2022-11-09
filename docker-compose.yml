@@ -55,11 +55,11 @@ services:
     image: grafana/grafana:9.2.4
     deploy:
       labels:
-        traefik.http.routers.influxdb.rule: Host(`grafana.bad-belzig.klima-daten.de`)
-        traefik.http.routers.influxdb.tls: "true"
-        traefik.http.routers.influxdb.tls.certresolver: default
+        traefik.http.routers.grafana.rule: Host(`grafana.bad-belzig.klima-daten.de`)
+        traefik.http.routers.grafana.tls: "true"
+        traefik.http.routers.grafana.tls.certresolver: default
         traefik.docker.network: public
-        traefik.http.services.influxdb.loadbalancer.server.port: 3000
+        traefik.http.services.grafana.loadbalancer.server.port: 3000
         traefik.enable: "true"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana-admin-password
