@@ -1,0 +1,99 @@
+version: "3.7"
+
+services:
+  node-red:
+    image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools
+    environment:
+      - TZ=Europe/Amsterdam
+      - ADMIN_PASSWORD=$2b$08$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
+      - NODE_RED_CREDENTIAL_SECRET__FILE=/run/secrets/node-red-credential-secret
+    networks:
+      public:
+      data-tools:
+    volumes:
+      - node-red-data:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        traefik.http.routers.node-red.rule: Host(`node-red.bad-belzig.klima-daten.de`)
+        traefik.http.routers.node-red.tls: "true"
+        traefik.http.routers.node-red.tls.certresolver: default
+        traefik.docker.network: public
+        traefik.http.services.node-red.loadbalancer.server.port: 1880
+        traefik.enable: "true"
+
+  influxdb:
+    image: influxdb:2.5
+    deploy:
+      labels:
+        traefik.http.routers.influxdb.rule: Host(`influxdb.bad-belzig.klima-daten.de`)
+        traefik.http.routers.influxdb.tls: "true"
+        traefik.http.routers.influxdb.tls.certresolver: default
+        traefik.docker.network: public
+        traefik.http.services.influxdb.loadbalancer.server.port: 8086
+        traefik.enable: "true"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_ORG=smart-village
+      - DOCKER_INFLUXDB_INIT_BUCKET=node-red
+      - DOCKER_INFLUXDB_INIT_USERNAME=influxdb-user
+      - DOCKER_INFLUXDB_INIT_RETENTION=4w
+      - DOCKER_INFLUXDB_INIT_PASSWORD_FILE=/run/secrets/influxdb-password
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN_FILE=/run/secrets/influxdb-admin-token
+    networks:
+      public:
+      data-tools:
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+    secrets:
+      - influxdb-password
+      - influxdb-admin-token
+
+  grafana:
+    image: grafana/grafana:9.2.4
+    deploy:
+      labels:
+        traefik.http.routers.influxdb.rule: Host(`grafana.bad-belzig.klima-daten.de`)
+        traefik.http.routers.influxdb.tls: "true"
+        traefik.http.routers.influxdb.tls.certresolver: default
+        traefik.docker.network: public
+        traefik.http.services.influxdb.loadbalancer.server.port: 3000
+        traefik.enable: "true"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana-admin-password
+    networks:
+      public:
+      data-tools:
+    volumes:
+      - grafana-data:/var/lib/grafana
+    secrets:
+      - grafana-admin-password
+
+
+volumes:
+  node-red-data:
+    external: true
+  influxdb-data:
+    external: true
+  grafana-data:
+    external: true
+
+secrets:
+  influxdb-password:
+    external: true
+  influxdb-admin-token:
+    external: true
+  grafana-admin-password:
+    external: true
+  node-red-credential-secret:
+    external: true
+
+networks:
+  public:
+    external: true
+  data-tools:
+    external: true
+
+
