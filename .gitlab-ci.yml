@@ -24,9 +24,8 @@ build:
     - docker build --cache-from $IMAGE --tag $IMAGE:$CI_COMMIT_SHA --tag $IMAGE -f $DOCKERFILE .
     - docker push $IMAGE:$CI_COMMIT_SHA
     - docker push $IMAGE
-  only:
-    - main
   rules:
+    - if: $CI_COMMIT_BRANCH == 'main'
     - changes:
       - settings.js
       - Dockerfile
