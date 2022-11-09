@@ -5,8 +5,7 @@ services:
     image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools
     environment:
       - TZ=Europe/Amsterdam
-      - ADMIN_PASSWORD=$2b$08$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
-      - NODE_RED_CREDENTIAL_SECRET__FILE=/run/secrets/node-red-credential-secret
+      - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
     networks:
       public:
       data-tools:

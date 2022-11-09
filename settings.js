@@ -1,3 +1,4 @@
+fs = require('fs/promises')
 /**
  * This is the default settings file provided by Node-RED.
  *
@@ -41,7 +42,7 @@ module.exports = {
      * node-red from being able to decrypt your existing credentials and they will be
      * lost.
      */
-    credentialSecret: process.env.NODE_RED_CREDENTIAL_SECRET,
+    credentialSecret: await fs.readFile('/run/secrets/node-red-credential-secret', 'utf8'),
 
     /** By default, the flow JSON will be formatted over multiple lines making
      * it easier to compare changes when using version control.
