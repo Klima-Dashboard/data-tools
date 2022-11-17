@@ -42,12 +42,11 @@ services:
       - DOCKER_INFLUXDB_INIT_USERNAME=influxdb-user
       - DOCKER_INFLUXDB_INIT_RETENTION=4w
       - DOCKER_INFLUXDB_INIT_PASSWORD_FILE=/run/secrets/influxdb-password
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN_FILE=/run/secrets/influxdb-admin-token
     networks:
       public:
       data-tools:
     volumes:
-      - influxdb-data:/var/lib/influxdb
+      - influxdb-data:/var/lib/influxdb2
     secrets:
       - influxdb-password
       - influxdb-admin-token
