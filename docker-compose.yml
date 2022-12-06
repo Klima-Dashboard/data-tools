@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   node-red:
-    image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools
+    image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools:node-red
     environment:
       - TZ=Europe/Amsterdam
       - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
@@ -24,6 +24,7 @@ services:
         traefik.enable: "true"
     secrets:
       - node-red-credential-secret
+      - node-red-keycloak-client-secret
 
   influxdb:
     image: influxdb:2.5
@@ -52,7 +53,7 @@ services:
       - influxdb-admin-token
 
   grafana:
-    image: grafana/grafana:9.2.4
+    image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools:grafana
     deploy:
       labels:
         traefik.http.routers.grafana.rule: Host(`grafana.bad-belzig.klima-daten.de`)
@@ -70,6 +71,7 @@ services:
       - grafana-data:/var/lib/grafana
     secrets:
       - grafana-admin-password
+      - grafana-keycloak-client-secret
 
 
 volumes:
@@ -89,11 +91,13 @@ secrets:
     external: true
   node-red-credential-secret:
     external: true
+  node-red-keycloak-client-secret:
+    external: true
+  grafana-keycloak-client-secret:
+    external: true
 
 networks:
   public:
     external: true
   data-tools:
     external: true
-
-

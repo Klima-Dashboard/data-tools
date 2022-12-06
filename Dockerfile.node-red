@@ -1,4 +1,6 @@
 FROM nodered/node-red:2.2.3
+RUN cd
+RUN npm i passport openid-client
 COPY settings.js /settings.js
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
