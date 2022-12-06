@@ -73,7 +73,6 @@ services:
       - grafana-admin-password
       - grafana-keycloak-client-secret
 
-
 volumes:
   node-red-data:
     external: true

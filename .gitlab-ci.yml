@@ -27,7 +27,8 @@ build:
     - if: $CI_COMMIT_BRANCH == 'main'
       changes:
       - settings.js
-      - Dockerfile
+      - Dockerfile.grafana
+      - Dockerfile.node-red
       - entrypoint.sh
 
 
