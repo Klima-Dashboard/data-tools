@@ -21,6 +21,8 @@ const { Issuer, Strategy } = require('openid-client')
 *  - Node Settings
 *
 **/
+
+console.log(process.env.NODE_RED_CREDENTIAL_SECRET)
 const keycloak = new Issuer({
   acr_values_supported: [
     '0',
@@ -317,7 +319,7 @@ const { Client } = keycloak
 const client = new Client({
   client_id: 'node-red',
   client_secret: process.env.CLIENT_SECRET,
-  redirect_uris: ['http://localhost:1880/auth/strategy/callback']
+  redirect_uris: ['https://node-red.bad-belzig.klima-daten.de/auth/strategy/callback']
 })
 
 module.exports = {

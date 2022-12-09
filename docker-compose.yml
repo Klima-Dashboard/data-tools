@@ -80,7 +80,6 @@ volumes:
     external: true
   grafana-data:
     external: true
-
 secrets:
   influxdb-password:
     external: true
