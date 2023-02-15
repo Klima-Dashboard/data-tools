@@ -20,7 +20,7 @@ build-grafana:
     DOCKERFILE: Dockerfile.grafana  
   script:
     - docker pull $IMAGE || true
-    - docker build --cache-from $IMAGE --tag $IMAGE:grafana-$CI_COMMIT_SHA --tag $IMAGE:grafana -f $DOCKERFILE .
+    - docker build --cache-from $IMAGE --tag $IMAGE-$CI_COMMIT_SHA --tag $IMAGE -f $DOCKERFILE .
     - docker push $IMAGE-$CI_COMMIT_SHA
     - docker push $IMAGE
   rules:
@@ -36,7 +36,7 @@ build-node-red:
     DOCKERFILE: Dockerfile
   script:
     - docker pull $IMAGE || true
-    - docker build --cache-from $IMAGE --tag $IMAGE:node-red-$CI_COMMIT_SHA --tag $IMAGE:node-red -f $DOCKERFILE .
+    - docker build --cache-from $IMAGE --tag $IMAGE-$CI_COMMIT_SHA --tag $IMAGE -f $DOCKERFILE .
     - docker push $IMAGE-$CI_COMMIT_SHA
     - docker push $IMAGE
   rules:
