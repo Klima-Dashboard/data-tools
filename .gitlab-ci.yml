@@ -33,7 +33,7 @@ build-node-red:
   stage: build
   variables:
     IMAGE: $CI_REGISTRY_IMAGE:node-red
-    DOCKERFILE: Dockerfile
+    DOCKERFILE: Dockerfile.node-red
   script:
     - docker pull $IMAGE || true
     - docker build --cache-from $IMAGE --tag $IMAGE-$CI_COMMIT_SHA --tag $IMAGE -f $DOCKERFILE .
