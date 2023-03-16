@@ -393,12 +393,17 @@ module.exports = {
       options: {
         client,
         verify(tokenset, userinfo, done) {
-          done(null, userinfo.preferred_username)
+          // TODO check if userinfo includes certain role and then set the user with the correct role in done
+          roles = userinfo.resource_access['node-red'].roles
+          if (roles.includes('admin')) {
+            done(null, 'admin')
+          }
         }
       }
     },
+    //TODO add one user per role that we want and call them 'admin', 'editor', 'viewer' etc... 
     users: [
-      { username: 'matsh', permissions: ['*']}
+      { username: 'admin', permissions: ['*']}
     ]
   },
 
