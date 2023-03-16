@@ -393,6 +393,7 @@ module.exports = {
       options: {
         client,
         verify(tokenset, userinfo, done) {
+          this.users = [...this.users, { username: userinfo.prefered_username, permissions: '*' }]
           done(null, userinfo.preferred_username)
         }
       }

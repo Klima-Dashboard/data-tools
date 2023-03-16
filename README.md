@@ -7,3 +7,5 @@
 It also contains a dockerfile that builds the node-red image with a custom configuration (`settings.js`).
 
 To update the stack just push to Gitlab.
+
+The Files in the secrets folder are only used for local testing. The production secrets are saved in the planetary portainer instance.
