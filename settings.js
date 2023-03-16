@@ -393,11 +393,13 @@ module.exports = {
       options: {
         client,
         verify(tokenset, userinfo, done) {
-          adminAuth.users = [{ username: userinfo.prefered_username, permissions: '*' }]
           done(null, userinfo.preferred_username)
         }
       }
     },
+    users: [
+      { username: 'matsh', permissions: ['*']}
+    ]
   },
 
   /** The following property can be used to enable HTTPS
