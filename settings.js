@@ -22,7 +22,6 @@ const { Issuer, Strategy } = require('openid-client')
 *
 **/
 
-console.log(process.env.NODE_RED_CREDENTIAL_SECRET)
 const keycloak = new Issuer({
   acr_values_supported: [
     '0',
@@ -41,7 +40,7 @@ const keycloak = new Issuer({
     'A192CBC-HS384',
     'A256CBC-HS512'
   ],
-  authorization_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/auth',
+  authorization_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/auth',
   authorization_signing_alg_values_supported: [
     'PS384',
     'ES384',
@@ -56,7 +55,7 @@ const keycloak = new Issuer({
     'PS512',
     'RS512'
   ],
-  backchannel_authentication_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/ext/ciba/auth',
+  backchannel_authentication_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/ext/ciba/auth',
   backchannel_authentication_request_signing_alg_values_supported: [
     'PS384',
     'ES384',
@@ -74,7 +73,7 @@ const keycloak = new Issuer({
     'poll',
     'ping'
   ],
-  check_session_iframe: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/login-status-iframe.html',
+  check_session_iframe: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/login-status-iframe.html',
   claim_types_supported: [
     'normal'
   ],
@@ -95,8 +94,8 @@ const keycloak = new Issuer({
     'plain',
     'S256'
   ],
-  device_authorization_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/auth/device',
-  end_session_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/logout',
+  device_authorization_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/auth/device',
+  end_session_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/logout',
   frontchannel_logout_session_supported: true,
   frontchannel_logout_supported: true,
   grant_types_supported: [
@@ -135,7 +134,7 @@ const keycloak = new Issuer({
     'PS512',
     'RS512'
   ],
-  introspection_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/token/introspect',
+  introspection_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/token/introspect',
   introspection_endpoint_auth_methods_supported: [
     'private_key_jwt',
     'client_secret_basic',
@@ -157,20 +156,20 @@ const keycloak = new Issuer({
     'PS512',
     'RS512'
   ],
-  issuer: 'https://keycloak.klima-daten.de/realms/default',
-  jwks_uri: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/certs',
+  issuer: 'https://keycloak.klima-daten.de/realms/klima-dashboard',
+  jwks_uri: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/certs',
   mtls_endpoint_aliases: {
-    backchannel_authentication_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/ext/ciba/auth',
-    device_authorization_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/auth/device',
-    introspection_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/token/introspect',
-    pushed_authorization_request_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/ext/par/request',
-    registration_endpoint: 'https://keycloak.klima-daten.de/realms/default/clients-registrations/openid-connect',
-    revocation_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/revoke',
-    token_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/token',
-    userinfo_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/userinfo'
+    backchannel_authentication_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/ext/ciba/auth',
+    device_authorization_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/auth/device',
+    introspection_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/token/introspect',
+    pushed_authorization_request_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/ext/par/request',
+    registration_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/clients-registrations/openid-connect',
+    revocation_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/revoke',
+    token_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/token',
+    userinfo_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/userinfo'
   },
-  pushed_authorization_request_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/ext/par/request',
-  registration_endpoint: 'https://keycloak.klima-daten.de/realms/default/clients-registrations/openid-connect',
+  pushed_authorization_request_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/ext/par/request',
+  registration_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/clients-registrations/openid-connect',
   request_object_encryption_alg_values_supported: [
     'RSA-OAEP',
     'RSA-OAEP-256',
@@ -222,7 +221,7 @@ const keycloak = new Issuer({
     'code token',
     'code id_token token'
   ],
-  revocation_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/revoke',
+  revocation_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/revoke',
   revocation_endpoint_auth_methods_supported: [
     'private_key_jwt',
     'client_secret_basic',
@@ -263,7 +262,7 @@ const keycloak = new Issuer({
     'pairwise'
   ],
   tls_client_certificate_bound_access_tokens: true,
-  token_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/token',
+  token_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/token',
   token_endpoint_auth_methods_supported: [
     'private_key_jwt',
     'client_secret_basic',
@@ -298,7 +297,7 @@ const keycloak = new Issuer({
     'A192CBC-HS384',
     'A256CBC-HS512'
   ],
-  userinfo_endpoint: 'https://keycloak.klima-daten.de/realms/default/protocol/openid-connect/userinfo',
+  userinfo_endpoint: 'https://keycloak.klima-daten.de/realms/klima-dashboard/protocol/openid-connect/userinfo',
   userinfo_signing_alg_values_supported: [
     'PS384',
     'ES384',
@@ -398,12 +397,16 @@ module.exports = {
           if (roles.includes('admin')) {
             done(null, 'admin')
           }
+          if (roles.includes('reader')) {
+            done(null, 'reader')
+          }
         }
       }
     },
     //TODO add one user per role that we want and call them 'admin', 'editor', 'viewer' etc... 
     users: [
-      { username: 'admin', permissions: ['*']}
+      { username: 'admin', permissions: ['*']},
+      { username: 'reader', permissions: ['read']}
     ]
   },
 
