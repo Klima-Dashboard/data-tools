@@ -28,6 +28,7 @@ services:
 
   influxdb:
     image: influxdb:2.5
+    command: ["influxd", "--session-length=1440"]
     deploy:
       labels:
         traefik.http.routers.influxdb.rule: Host(`influxdb.bad-belzig.klima-daten.de`)
