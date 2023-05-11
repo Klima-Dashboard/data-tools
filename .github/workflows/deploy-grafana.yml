@@ -23,5 +23,5 @@ jobs:
         - run: >-
             docker build .
             -f Dockerfile.grafana
-            -t ghcr.io/klima-Dashboard/data-tools:latest .
-        - run: docker push ghcr.io/Klima-Dashboard/data-tools:latest
+            -t ghcr.io/klima-dashboard/data-tools:latest .
+        - run: docker push ghcr.io/klima-dashboard/data-tools:latest
