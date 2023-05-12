@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Grafana
 
 on:
   workflow_dispatch:
@@ -10,18 +10,36 @@ on:
       - 'grafana.ini'
 
 jobs:
-  build-grafana:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - name: Login to GitHub Container Registry
-          uses: docker/login-action@v2
-          with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
-        - run: >-
-            docker build .
-            -f Dockerfile.grafana
-            -t ghcr.io/klima-dashboard/data-tools:latest
-        - run: docker push ghcr.io/klima-dashboard/data-tools:latest
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - run: >-
+          docker build .
+          -f Dockerfile.grafana
+          -t ghcr.io/klima-dashboard/data-tools:latest
+      - run: docker push ghcr.io/klima-dashboard/data-tools:latest
+
+  deploy: 
+    runs-on: ubuntu-latest
+    env:
+      QUANTUM_USER: ${{ secrets.QUANTUM_USER }}
+      QUANTUM_PASSWORD: ${{ secrets.QUANTUM_PASSWORD }}
+      QUANTUM_ENDPOINT: "tpwd-klimadashboard"
+      QUANTUM_STACK: "data-tools"
+    steps: 
+      - uses: actions/checkout@v3
+      - run: |
+          docker run \
+          -v ${{ github.workspace }}:/work -w /work \
+          -e QUANTUM_USER \
+          -e QUANTUM_PASSWORD \
+          -e QUANTUM_ENDPOINT \
+          --rm r.planetary-quantum.com/quantum-public/cli:2 \
+          quantum-cli stacks update --create --stack $QUANTUM_STACK --wait
