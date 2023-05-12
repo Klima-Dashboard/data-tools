@@ -397,9 +397,7 @@ module.exports = {
           if (roles.includes('admin')) {
             done(null, 'admin')
           }
-          if (roles.includes('reader')) {
-            done(null, 'reader')
-          }
+          done(null, 'reader')
         }
       }
     },
