@@ -318,7 +318,7 @@ const { Client } = keycloak
 const client = new Client({
   client_id: 'node-red',
   client_secret: process.env.CLIENT_SECRET,
-  redirect_uris: ['https://node-red.bad-belzig.klima-daten.de/auth/strategy/callback']
+  redirect_uris: [process.env.REDIRECT_URI],
 })
 
 module.exports = {

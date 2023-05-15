@@ -1,11 +1,12 @@
 version: "3.7"
 
 services:
-  node-red:
+  node-red-main:
     image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools:node-red
     environment:
       - TZ=Europe/Amsterdam
       - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
+      - REDIRECT_URI=https://node-red.bad-belzig.klima-daten.de/auth/strategy/callback
     networks:
       public:
       data-tools:
@@ -25,6 +26,86 @@ services:
     secrets:
       - node-red-credential-secret
       - node-red-keycloak-client-secret
+
+
+  node-red-1:
+    image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools:node-red
+    environment:
+      - TZ=Europe/Amsterdam
+      - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
+      - REDIRECT_URI=https://node-red-1.bad-belzig.klima-daten.de/auth/strategy/callback
+    networks:
+      public:
+      data-tools:
+    volumes:
+      - node-red-1-data:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        traefik.http.routers.node-red-1.rule: Host(`node-red-1.bad-belzig.klima-daten.de`)
+        traefik.http.routers.node-red-1.tls: "true"
+        traefik.http.routers.node-red-1.tls.certresolver: default
+        traefik.docker.network: public
+        traefik.http.services.node-red-1.loadbalancer.server.port: 1880
+        traefik.enable: "true"
+    secrets:
+      - node-red-credential-secret
+      - node-red-keycloak-client-secret
+      
+  node-red-2:
+    image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools:node-red
+    environment:
+      - TZ=Europe/Amsterdam
+      - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
+      - REDIRECT_URI=https://node-red-2.bad-belzig.klima-daten.de/auth/strategy/callback
+    networks:
+      public:
+      data-tools:
+    volumes:
+      - node-red-2-data:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        traefik.http.routers.node-red-2.rule: Host(`node-red-2.bad-belzig.klima-daten.de`)
+        traefik.http.routers.node-red-2.tls: "true"
+        traefik.http.routers.node-red-2.tls.certresolver: default
+        traefik.docker.network: public
+        traefik.http.services.node-red-2.loadbalancer.server.port: 1880
+        traefik.enable: "true"
+    secrets:
+      - node-red-credential-secret
+      - node-red-keycloak-client-secret
+      
+  node-red-3:
+    image: registry.gitlab.tpwd.de/tpwd/klima-dashboard/data-tools:node-red
+    environment:
+      - TZ=Europe/Amsterdam
+      - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
+      - REDIRECT_URI=https://node-red-3.bad-belzig.klima-daten.de/auth/strategy/callback
+    networks:
+      public:
+      data-tools:
+    volumes:
+      - node-red-3-data:/data
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        traefik.http.routers.node-red-3.rule: Host(`node-red-3.bad-belzig.klima-daten.de`)
+        traefik.http.routers.node-red-3.tls: "true"
+        traefik.http.routers.node-red-3.tls.certresolver: default
+        traefik.docker.network: public
+        traefik.http.services.node-red-3.loadbalancer.server.port: 1880
+        traefik.enable: "true"
+    secrets:
+      - node-red-credential-secret
+      - node-red-keycloak-client-secret
+
 
   influxdb:
     image: influxdb:2.5
@@ -76,6 +157,12 @@ services:
 
 volumes:
   node-red-data:
+    external: true
+  node-red-1-data:
+    external: true
+  node-red-2-data:
+    external: true
+  node-red-3-data:
     external: true
   influxdb-data:
     external: true
