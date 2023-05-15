@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: >-
           docker build .
-          -f Dockerfile.grafana
+          -f Dockerfile.node-red
           -t ghcr.io/klima-dashboard/data-tools:node-red
       - run: docker push ghcr.io/klima-dashboard/data-tools:node-red
 
