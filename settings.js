@@ -394,8 +394,23 @@ module.exports = {
         verify(tokenset, userinfo, done) {
           // TODO check if userinfo includes certain role and then set the user with the correct role in done
           roles = userinfo.resource_access['node-red'].roles
-          if (roles.includes('admin')) {
-            done(null, 'admin')
+          if (process.env.REDIRECT_URI.includes(1)) {
+            if (roles.includes('admin-instance-one') || roles.includes('editor')) {
+              done(null, 'admin')
+            }
+          } else if (process.env.REDIRECT_URI.includes(2)) {
+            if (roles.includes('admin-instance-two') || roles.includes('editor')) {
+              done(null, 'admin')
+            }
+          }
+          else if (process.env.REDIRECT_URI.includes(3)) {
+            if (roles.includes('admin-instance-three') || roles.includes('editor')) {
+              done(null, 'admin')
+            }
+          } else {
+            if (roles.includes('admin') || roles.includes('editor')) {
+              done(null, 'admin')
+            }
           }
           done(null, 'reader')
         }
