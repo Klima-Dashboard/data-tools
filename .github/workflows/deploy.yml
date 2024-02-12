@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main 
+      - release/michendorf
 
 jobs:
   build-grafana: 
@@ -20,8 +20,8 @@ jobs:
       - run: >-
           docker build .
           -f Dockerfile.grafana
-          -t ghcr.io/klima-dashboard/data-tools:grafana
-      - run: docker push ghcr.io/klima-dashboard/data-tools:grafana
+          -t ghcr.io/klima-dashboard/data-tools:grafana-michendorf
+      - run: docker push ghcr.io/klima-dashboard/data-tools:grafana-michendorf
 
   build-node-red:
     runs-on: ubuntu-latest
@@ -36,8 +36,8 @@ jobs:
       - run: >-
           docker build .
           -f Dockerfile.node-red
-          -t ghcr.io/klima-dashboard/data-tools:node-red
-      - run: docker push ghcr.io/klima-dashboard/data-tools:node-red
+          -t ghcr.io/klima-dashboard/data-tools:node-red-michendorf
+      - run: docker push ghcr.io/klima-dashboard/data-tools:node-red-michendorf
 
   deploy: 
     runs-on: ubuntu-latest
@@ -45,7 +45,7 @@ jobs:
       QUANTUM_USER: ${{ secrets.QUANTUM_USER }}
       QUANTUM_PASSWORD: ${{ secrets.QUANTUM_PASSWORD }}
       QUANTUM_ENDPOINT: "tpwd-klimadashboard"
-      QUANTUM_STACK: "data-tools"
+      QUANTUM_STACK: "data-tools-michendorf"
     steps: 
       - uses: actions/checkout@v3
       - run: |

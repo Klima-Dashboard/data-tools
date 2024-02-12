@@ -2,11 +2,11 @@ version: "3.7"
 
 services:
   node-red-main:
-    image: ghcr.io/klima-dashboard/data-tools:node-red
+    image: ghcr.io/klima-dashboard/data-tools:node-red-michendorf
     environment:
       - TZ=Europe/Amsterdam
       - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
-      - REDIRECT_URI=https://node-red.bad-belzig.klima-daten.de/auth/strategy/callback
+      - REDIRECT_URI=https://node-red.michendorf.klima-daten.de/auth/strategy/callback
     networks:
       public:
       data-tools:
@@ -17,23 +17,23 @@ services:
       restart_policy:
         condition: on-failure
       labels:
-        traefik.http.routers.node-red.rule: Host(`node-red.bad-belzig.klima-daten.de`)
-        traefik.http.routers.node-red.tls: "true"
-        traefik.http.routers.node-red.tls.certresolver: default
+        traefik.http.routers.node-red-michendorf.rule: Host(`node-red.michendorf.klima-daten.de`)
+        traefik.http.routers.node-red-michendorf.tls: "true"
+        traefik.http.routers.node-red-michendorf.tls.certresolver: default
         traefik.docker.network: public
-        traefik.http.services.node-red.loadbalancer.server.port: 1880
+        traefik.http.services.node-red-michendorf.loadbalancer.server.port: 1880
         traefik.enable: "true"
     secrets:
-      - node-red-credential-secret
-      - node-red-keycloak-client-secret
+      - node-red-credential-secret-michendorf
+      - node-red-keycloak-client-secret-michendorf
 
 
   node-red-1:
-    image: ghcr.io/klima-dashboard/data-tools:node-red
+    image: ghcr.io/klima-dashboard/data-tools:node-red-michendorf
     environment:
       - TZ=Europe/Amsterdam
       - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
-      - REDIRECT_URI=https://node-red-1.bad-belzig.klima-daten.de/auth/strategy/callback
+      - REDIRECT_URI=https://node-red-1.michendorf.klima-daten.de/auth/strategy/callback
     networks:
       public:
       data-tools:
@@ -44,22 +44,22 @@ services:
       restart_policy:
         condition: on-failure
       labels:
-        traefik.http.routers.node-red-1.rule: Host(`node-red-1.bad-belzig.klima-daten.de`)
-        traefik.http.routers.node-red-1.tls: "true"
-        traefik.http.routers.node-red-1.tls.certresolver: default
+        traefik.http.routers.node-red-1-michendorf.rule: Host(`node-red-1.michendorf.klima-daten.de`)
+        traefik.http.routers.node-red-1-michendorf.tls: "true"
+        traefik.http.routers.node-red-1-michendorf.tls.certresolver: default
         traefik.docker.network: public
-        traefik.http.services.node-red-1.loadbalancer.server.port: 1880
+        traefik.http.services.node-red-1-michendorf.loadbalancer.server.port: 1880
         traefik.enable: "true"
     secrets:
-      - node-red-credential-secret
-      - node-red-keycloak-client-secret
+      - node-red-credential-secret-michendorf
+      - node-red-keycloak-client-secret-michendorf
       
   node-red-2:
-    image: ghcr.io/klima-dashboard/data-tools:node-red
+    image: ghcr.io/klima-dashboard/data-tools:node-red-michendorf
     environment:
       - TZ=Europe/Amsterdam
       - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
-      - REDIRECT_URI=https://node-red-2.bad-belzig.klima-daten.de/auth/strategy/callback
+      - REDIRECT_URI=https://node-red-2.michendorf.klima-daten.de/auth/strategy/callback
     networks:
       public:
       data-tools:
@@ -70,22 +70,22 @@ services:
       restart_policy:
         condition: on-failure
       labels:
-        traefik.http.routers.node-red-2.rule: Host(`node-red-2.bad-belzig.klima-daten.de`)
-        traefik.http.routers.node-red-2.tls: "true"
-        traefik.http.routers.node-red-2.tls.certresolver: default
+        traefik.http.routers.node-red-2-michendorf.rule: Host(`node-red-2.michendorf.klima-daten.de`)
+        traefik.http.routers.node-red-2-michendorf.tls: "true"
+        traefik.http.routers.node-red-2-michendorf.tls.certresolver: default
         traefik.docker.network: public
-        traefik.http.services.node-red-2.loadbalancer.server.port: 1880
+        traefik.http.services.node-red-2-michendorf.loadbalancer.server.port: 1880
         traefik.enable: "true"
     secrets:
-      - node-red-credential-secret
-      - node-red-keycloak-client-secret
+      - node-red-credential-secret-michendorf
+      - node-red-keycloak-client-secret-michendorf
       
   node-red-3:
-    image: ghcr.io/klima-dashboard/data-tools:node-red
+    image: ghcr.io/klima-dashboard/data-tools:node-red-michendorf
     environment:
       - TZ=Europe/Amsterdam
       - ADMIN_PASSWORD=$$2b$$08$$v8d1BR/rftGMP6969SHnHO5wWNGirMJxRuKQ28wxPs56nc7A79r0G
-      - REDIRECT_URI=https://node-red-3.bad-belzig.klima-daten.de/auth/strategy/callback
+      - REDIRECT_URI=https://node-red-3.michendorf.klima-daten.de/auth/strategy/callback
     networks:
       public:
       data-tools:
@@ -96,15 +96,15 @@ services:
       restart_policy:
         condition: on-failure
       labels:
-        traefik.http.routers.node-red-3.rule: Host(`node-red-3.bad-belzig.klima-daten.de`)
-        traefik.http.routers.node-red-3.tls: "true"
-        traefik.http.routers.node-red-3.tls.certresolver: default
+        traefik.http.routers.node-red-3-michendorf.rule: Host(`node-red-3.michendorf.klima-daten.de`)
+        traefik.http.routers.node-red-3-michendorf.tls: "true"
+        traefik.http.routers.node-red-3-michendorf.tls.certresolver: default
         traefik.docker.network: public
-        traefik.http.services.node-red-3.loadbalancer.server.port: 1880
+        traefik.http.services.node-red-3-michendorf.loadbalancer.server.port: 1880
         traefik.enable: "true"
     secrets:
-      - node-red-credential-secret
-      - node-red-keycloak-client-secret
+      - node-red-credential-secret-michendorf
+      - node-red-keycloak-client-secret-michendorf
 
 
   influxdb:
@@ -112,11 +112,11 @@ services:
     command: ["influxd", "--session-length=1440"]
     deploy:
       labels:
-        traefik.http.routers.influxdb.rule: Host(`influxdb.bad-belzig.klima-daten.de`)
-        traefik.http.routers.influxdb.tls: "true"
-        traefik.http.routers.influxdb.tls.certresolver: default
+        traefik.http.routers.influxdb-michendorf.rule: Host(`influxdb.michendorf.klima-daten.de`)
+        traefik.http.routers.influxdb-michendorf.tls: "true"
+        traefik.http.routers.influxdb-michendorf.tls.certresolver: default
         traefik.docker.network: public
-        traefik.http.services.influxdb.loadbalancer.server.port: 8086
+        traefik.http.services.influxdb-michendorf.loadbalancer.server.port: 8086
         traefik.enable: "true"
     environment:
       - DOCKER_INFLUXDB_INIT_MODE=setup
@@ -124,66 +124,59 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=node-red
       - DOCKER_INFLUXDB_INIT_USERNAME=influxdb-user
       - DOCKER_INFLUXDB_INIT_RETENTION=4w
-      - DOCKER_INFLUXDB_INIT_PASSWORD_FILE=/run/secrets/influxdb-password
+      - DOCKER_INFLUXDB_INIT_PASSWORD_FILE=/run/secrets/influxdb-password-michendorf
     networks:
       public:
       data-tools:
     volumes:
       - influxdb-data:/var/lib/influxdb2
     secrets:
-      - influxdb-password
-      - influxdb-admin-token
+      - influxdb-password-michendorf
+      - influxdb-admin-token-michendorf
 
   grafana:
-    image: ghcr.io/klima-dashboard/data-tools:grafana
+    image: ghcr.io/klima-dashboard/data-tools:grafana-michendorf
     deploy:
       labels:
-        traefik.http.routers.grafana.rule: Host(`grafana.bad-belzig.klima-daten.de`)
-        traefik.http.routers.grafana.tls: "true"
-        traefik.http.routers.grafana.tls.certresolver: default
+        traefik.http.routers.grafana-michendorf.rule: Host(`grafana.michendorf.klima-daten.de`)
+        traefik.http.routers.grafana-michendorf.tls: "true"
+        traefik.http.routers.grafana-michendorf.tls.certresolver: default
         traefik.docker.network: public
-        traefik.http.services.grafana.loadbalancer.server.port: 3000
+        traefik.http.services.grafana-michendorf.loadbalancer.server.port: 3000
         traefik.enable: "true"
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana-admin-password
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana-admin-password-michendorf
     networks:
       public:
       data-tools:
     volumes:
       - grafana-data:/var/lib/grafana
     secrets:
-      - grafana-admin-password
-      - grafana-keycloak-client-secret
+      - grafana-admin-password-michendorf
+      - grafana-keycloak-client-secret-michendorf
 
 volumes:
   node-red-data:
-    external: true
   node-red-1-data:
-    external: true
   node-red-2-data:
-    external: true
   node-red-3-data:
-    external: true
   influxdb-data:
-    external: true
   grafana-data:
-    external: true
 secrets:
-  influxdb-password:
+  influxdb-password-michendorf:
     external: true
-  influxdb-admin-token:
+  influxdb-admin-token-michendorf:
     external: true
-  grafana-admin-password:
+  grafana-admin-password-michendorf:
     external: true
-  node-red-credential-secret:
+  node-red-credential-secret-michendorf:
     external: true
-  node-red-keycloak-client-secret:
+  node-red-keycloak-client-secret-michendorf:
     external: true
-  grafana-keycloak-client-secret:
+  grafana-keycloak-client-secret-michendorf:
     external: true
 
 networks:
   public:
     external: true
   data-tools:
-    external: true
